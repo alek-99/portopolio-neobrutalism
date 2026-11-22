@@ -52,16 +52,19 @@ export default function HeroSection() {
             </p>
 
             <h1 className="hero-heading">
-              BUILDING
-              <span className="heading-outline">DIGITAL</span>
-              <span className="heading-blue">EXPERIENCES.</span>
+              WEB
+              <span className="heading-outline">DEVELOPER</span>
+              <span className="heading-blue">CREATING DIGITAL EXPERIENCES.</span>
             </h1>
 
             <p className="hero-description">
-              Seorang Web Developer yang passionate dalam
-              menciptakan website modern, interaktif, dan
-              inovatif. Menggabungkan kreativitas dengan
-              teknologi untuk membangun sesuatu yang bermakna.
+               Halo, saya Yudi, seorang Web Developer yang berfokus
+  pada pengembangan website modern, responsif, dan
+  interaktif. Saya menggabungkan kreativitas, desain
+  antarmuka, serta teknologi web untuk menciptakan
+  pengalaman digital yang fungsional dan bermakna.
+  Melalui berbagai proyek, saya terus mengembangkan
+  kemampuan dalam membangun solusi digital yang inovatif.
             </p>
 
             <div className="hero-actions">
@@ -106,7 +109,7 @@ export default function HeroSection() {
               <div className="hero-image-container">
                 <img
                   src="/images/profile.png"
-                  alt="Jordi - Creative Web Developer"
+                  alt="Foto profil Yudi, Web Developer dan Creative Developer"
                   className="hero-profile-image"
                 />
               </div>
