@@ -10,53 +10,178 @@ import {
   FaLocationDot,
   FaUser,
 } from "react-icons/fa6";
+
+import {
+  motion,
+  useReducedMotion,
+} from "motion/react";
+
 import "@/app/about.css";
+
 export default function AboutMe() {
+  const reduceMotion = useReducedMotion();
+
+  const fadeUp = {
+    hidden: {
+      opacity: 0,
+      y: reduceMotion ? 0 : 40,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.18,
+      },
+    },
+  };
+
+  const cardAnimation = {
+    hidden: {
+      opacity: 0,
+      y: reduceMotion ? 0 : 50,
+      scale: reduceMotion ? 1 : 0.94,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
   return (
     <section className="about-section" id="about">
 
       <div className="about-container">
 
         {/* HEADER */}
-        <div className="about-header">
-          <div className="about-label">
+        <motion.div
+          className="about-header"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.div
+            className="about-label"
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
             <FaUser />
             <span>GET TO KNOW ME</span>
-          </div>
+          </motion.div>
 
           <div className="about-heading-row">
             <h2>
               ABOUT
-              <span> ME.</span>
+              <motion.span
+                initial={{ opacity: 0, x: 25 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25, duration: 0.7 }}
+              >
+                {" "}ME.
+              </motion.span>
             </h2>
-
-            {/* <span className="about-number">01 / 04</span> */}
           </div>
-        </div>
+        </motion.div>
 
         {/* MAIN CONTENT */}
         <div className="about-grid">
 
           {/* LEFT VISUAL */}
-          <div className="about-visual">
+          <motion.div
+            className="about-visual"
+            initial={{
+              opacity: 0,
+              x: reduceMotion ? 0 : -70,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
 
-            <div className="about-image-card">
+            <motion.div
+              className="about-image-card"
+              whileHover={
+                reduceMotion
+                  ? {}
+                  : {
+                      y: -8,
+                      rotate: -1,
+                      transition: { duration: 0.3 },
+                    }
+              }
+            >
 
               <div className="about-image-top">
                 <span>THE PERSON BEHIND THE CODE</span>
-                <span>✳</span>
+                <motion.span
+                  animate={
+                    reduceMotion
+                      ? {}
+                      : { rotate: 360 }
+                  }
+                  transition={{
+                    duration: 12,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  ✳
+                </motion.span>
               </div>
 
               <div className="about-image">
-                <img
+                <motion.img
                   src="/images/about.png"
                   alt="Yudi Permana - Web Developer"
+                  initial={{
+                    opacity: 0,
+                    scale: reduceMotion ? 1 : 1.15,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1.2,
+                    ease: "easeOut",
+                  }}
                 />
 
-                <div className="about-image-overlay">
+                <motion.div
+                  className="about-image-overlay"
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.7 }}
+                >
                   <span>CREATIVE MIND.</span>
                   <strong>TECH ENTHUSIAST.</strong>
-                </div>
+                </motion.div>
               </div>
 
               <div className="about-image-bottom">
@@ -64,33 +189,74 @@ export default function AboutMe() {
                 <FaArrowUpRightFromSquare />
               </div>
 
-            </div>
+            </motion.div>
 
-            <div className="about-sticker">
+            {/* FLOATING STICKER */}
+            <motion.div
+              className="about-sticker"
+              animate={
+                reduceMotion
+                  ? {}
+                  : {
+                      y: [0, -12, 0],
+                      rotate: [0, 3, 0, -3, 0],
+                    }
+              }
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               <FaCode />
               <span>CODE WITH PASSION</span>
-            </div>
+            </motion.div>
 
-            <div className="about-decoration">✳</div>
+            {/* ROTATING DECORATION */}
+            <motion.div
+              className="about-decoration"
+              animate={
+                reduceMotion ? {} : { rotate: 360 }
+              }
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              ✳
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* RIGHT DESCRIPTION */}
-          <div className="about-content">
+          <motion.div
+            className="about-content"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
 
-            <p className="about-greeting">
+            <motion.p
+              className="about-greeting"
+              variants={fadeUp}
+            >
               HELLO, NICE TO MEET YOU!
-            </p>
+            </motion.p>
 
-            <h3>
+            <motion.h3 variants={fadeUp}>
               I'm Yudi Permana,
               <br />
               a <span>Web Developer</span>
               <br />
               & Tech Enthusiast.
-            </h3>
+            </motion.h3>
 
-            <p className="about-description">
+            <motion.p
+              className="about-description"
+              variants={fadeUp}
+            >
               Saya adalah seseorang yang memiliki ketertarikan
               besar terhadap dunia teknologi, khususnya dalam
               pengembangan website dan pemrograman.
@@ -102,36 +268,86 @@ export default function AboutMe() {
               bagaimana mengubah ide menjadi sesuatu yang
               bermanfaat dan memberikan pengalaman terbaik
               bagi penggunanya.
-            </p>
+            </motion.p>
 
-            <p className="about-description">
+            <motion.p
+              className="about-description"
+              variants={fadeUp}
+            >
               Saya senang mempelajari teknologi baru,
               mengeksplorasi berbagai ide kreatif, dan terus
               mengembangkan kemampuan untuk menciptakan
               solusi digital yang inovatif.
-            </p>
+            </motion.p>
 
-            <div className="about-location">
+            <motion.div
+              className="about-location"
+              variants={fadeUp}
+            >
               <FaLocationDot />
               <span>INDONESIA</span>
-            </div>
+            </motion.div>
 
-            <a href="#contact" className="about-contact-btn">
+            <motion.a
+              href="#contact"
+              className="about-contact-btn"
+              variants={fadeUp}
+              whileHover={
+                reduceMotion
+                  ? {}
+                  : {
+                      y: -5,
+                      scale: 1.04,
+                    }
+              }
+              whileTap={{ scale: 0.96 }}
+            >
               LET'S CONNECT
-              <FaArrowUpRightFromSquare />
-            </a>
 
-          </div>
+              <motion.span
+                animate={
+                  reduceMotion
+                    ? {}
+                    : { x: [0, 4, 0], y: [0, -4, 0] }
+                }
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <FaArrowUpRightFromSquare />
+              </motion.span>
+            </motion.a>
+
+          </motion.div>
 
         </div>
 
         {/* VALUES */}
-        <div className="about-values">
+        <motion.div
+          className="about-values"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
 
-          <div className="about-value-card value-blue">
+          <motion.div
+            className="about-value-card value-blue"
+            variants={cardAnimation}
+            whileHover={
+              reduceMotion
+                ? {}
+                : {
+                    y: -12,
+                    rotate: -1,
+                    transition: { duration: 0.25 },
+                  }
+            }
+          >
             <div className="value-top">
-              {/* <span>01</span>
-              <FaLaptopCode /> */}
+              <FaLaptopCode />
             </div>
 
             <h4>PASSION</h4>
@@ -140,12 +356,23 @@ export default function AboutMe() {
               Selalu antusias dalam dunia teknologi,
               programming, dan pengembangan website.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="about-value-card value-lime">
+          <motion.div
+            className="about-value-card value-lime"
+            variants={cardAnimation}
+            whileHover={
+              reduceMotion
+                ? {}
+                : {
+                    y: -12,
+                    rotate: 1,
+                    transition: { duration: 0.25 },
+                  }
+            }
+          >
             <div className="value-top">
-              {/* <span>02</span>
-              <FaLightbulb /> */}
+              <FaLightbulb />
             </div>
 
             <h4>CREATIVITY</h4>
@@ -154,12 +381,23 @@ export default function AboutMe() {
               Senang mengeksplorasi ide baru dan
               menciptakan sesuatu yang berbeda.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="about-value-card value-orange">
+          <motion.div
+            className="about-value-card value-orange"
+            variants={cardAnimation}
+            whileHover={
+              reduceMotion
+                ? {}
+                : {
+                    y: -12,
+                    rotate: 1,
+                    transition: { duration: 0.25 },
+                  }
+            }
+          >
             <div className="value-top">
-              {/* <span>03</span>
-              <FaRocket /> */}
+              <FaRocket />
             </div>
 
             <h4>GROWTH</h4>
@@ -168,20 +406,34 @@ export default function AboutMe() {
               Terus belajar, berkembang, dan menghadapi
               tantangan untuk menjadi lebih baik.
             </p>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
         {/* BOTTOM QUOTE */}
-        <div className="about-quote">
+        <motion.div
+          className="about-quote"
+          initial={{
+            opacity: 0,
+            y: reduceMotion ? 0 : 40,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{
+            duration: 0.9,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
           <span className="quote-symbol">“</span>
 
           <p>
             GREAT THINGS ARE BUILT ONE LINE OF CODE AT A TIME.
           </p>
 
-          {/* <span className="quote-star">✳</span> */}
-        </div>
+        </motion.div>
 
       </div>
 

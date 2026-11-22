@@ -21,15 +21,15 @@ export default function HeroSection() {
 
         {/* NAVBAR */}
         <nav className="hero-nav">
-          <a href="#" className="hero-brand">
+          {/* <a href="#" className="hero-brand">
             <span className="brand-icon">J.</span>
             YUDI<span className="brand-dot">.</span>
-          </a>
+          </a> */}
 
-          <div className="hero-nav-status">
+          {/* <div className="hero-nav-status">
             <span className="online-dot" />
             CREATIVE DEVELOPER
-          </div>
+          </div> */}
 
           <a href="#contact" className="hero-nav-button">
             LET'S TALK <FaArrowRight />
